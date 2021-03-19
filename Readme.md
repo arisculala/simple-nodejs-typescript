@@ -2,6 +2,23 @@
 This is a simple boiletplate for nodejs typescript
 - Make sure you have installed nodejs in your machine (https://nodejs.org/en/download/package-manager/)
 
+## You can simple download the sourcecode and run in your local
+- Clone the project in your local
+```
+git clone https://github.com/arisculala/simple-nodejs-typescript.git
+```
+
+- Run command below, to install all dependency using the content of `package.json`
+```
+npm install
+```
+
+- Run the application
+```
+npm run start
+```
+
+
 ## Project Initialization
 - Create project folder
   ```
