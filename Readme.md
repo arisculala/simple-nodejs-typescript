@@ -1,24 +1,18 @@
 # Simple Nodejs Typescript
-
 This is a simple boiletplate for nodejs typescript
-
 - Make sure you have installed nodejs in your machine (https://nodejs.org/en/download/package-manager/)
 
 ## Project Initialization
-
 - Create project folder
   ```
   mkdir simple-nodejs-typescript
   ```
 - Go inside `simple-nodejs-typescript` and create a `package.json` by opening your terminal
-
   ```
   npm init
   ```
-
 - Answer the questions prompt by terminal and confirm creation of package.json
   Here is the package.json file created:
-
 ```
 {
   "name": "simple-nodejs-typescript",
@@ -44,7 +38,6 @@ npm i -D typescript ts-node
 ```
 `typescript` will install Typescript package
 `ts-node` will install Typescript node runner so we don't need to build the application everytime we do a change, we will use Nodemon
-
 - Run below command to create `tsconfig.json` file with default options enabled and comments
 ```
 npx typescript --init
@@ -55,28 +48,27 @@ Here is the tsconfig.json content:
 ```
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "sourceMap": true,
-        "outDir": "./dist",
-        "rootDir": "./src",
-        /* Strict Type-Checking Options */
-        "strict": true,
-        "noImplicitAny": true,
-        /* Module Resolution Options */
-        "moduleResolution": "node",
-        "baseUrl": "./src",
-        "esModuleInterop": true,
-        /* Advanced Options */
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+      "target": "es5",
+      "module": "commonjs",
+      "sourceMap": true,
+      "outDir": "./dist",
+      "rootDir": "./src",
+      /* Strict Type-Checking Options */
+      "strict": true,
+      "noImplicitAny": true,
+      /* Module Resolution Options */
+      "moduleResolution": "node",
+      "baseUrl": "./src",
+      "esModuleInterop": true,
+      /* Advanced Options */
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
     },
     "lib": ["es2015"],
     "include": ["src/**/*"],
     "exclude": ["node_modules"]
 }
 ```
-
 - Setup scripts inside `package.json`
 ```
 {
@@ -114,6 +106,10 @@ app.use('/', (req: Request, res: Response, next: NextFunction ) => {
 
 // Start server
 app.listen(port, () => console.log(`Server is listening on port ${port}!`));
+```
+- Compile/build the application
+```
+npm run build
 ```
 
 ## Setup Nodemon
