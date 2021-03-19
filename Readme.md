@@ -38,27 +38,84 @@ This is a simple boiletplate for nodejs typescript
 ```
 
 ## Setup Typescript
+- Install and configure typescript
+```
+npm i -D typescript ts-node
+```
+`typescript` will install Typescript package
+`ts-node` will install Typescript node runner so we don't need to build the application everytime we do a change, we will use Nodemon
+
+- Run below command to create `tsconfig.json` file with default options enabled and comments
+```
+npx typescript --init
+```
+Here is the tsconfig.json content:
+`dist` - directory where we want to compile the source code to
+`rootDir` - directory where the Typescript files are going to be located
+```
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "sourceMap": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        /* Strict Type-Checking Options */
+        "strict": true,
+        "noImplicitAny": true,
+        /* Module Resolution Options */
+        "moduleResolution": "node",
+        "baseUrl": "./src",
+        "esModuleInterop": true,
+        /* Advanced Options */
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "lib": ["es2015"],
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}
+```
+
+- Setup scripts inside `package.json`
+```
+{
+    // ...
+    "scripts": {
+        "start": "nodemon",
+        "build": "tsc",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    // ...
+}
+```
 
 ## Setup Express
+- Setup express
+```
+npm i -S express
+npm i -D @types/express
+```
+`first command` - install express package
+`second command` - since express does not have build in Typescript definitions
+
+- Create `src/index.ts` with below content:
+```
+import express, { Application, Request, Response, NextFunction } from 'express';
+
+// Instance of express
+const app: Application = express();
+const port = 8010;
+
+// Application routing
+app.use('/', (req: Request, res: Response, next: NextFunction ) => {
+    res.status(200).send({data: 'Simple Nodejs Typescript Application'});
+});
+
+// Start server
+app.listen(port, () => console.log(`Server is listening on port ${port}!`));
+```
 
 ## Setup Nodemon
 
-1. Create a new repository in your own github profile named `backend-coding-test` and commit the contents of this folder
-2. Ensure `node (>8.6 and <= 10)` and `npm` are installed
-3. Run `npm install`
-4. Run `npm test`
-5. Run `npm start`
-6. Hit the server to test health `curl localhost:8010/health` and expect a `200` response
 
-## Tasks
-
-Below will be your set of tasks to accomplish. Please work on each of these tasks in order. Success criteria will be defined clearly for each task
-
-1. [Documentation](#documentation)
-2. [Implement Tooling](#implement-tooling)
-3. [Implement Pagination](#implement-pagination)
-4. [Refactoring](#refactoring)
-5. [Security](#security)
-6. [Load Testing](#load-testing)
-
-### Documentation
