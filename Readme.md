@@ -7,10 +7,12 @@ This is a simple boiletplate for nodejs typescript
   ```
   mkdir simple-nodejs-typescript
   ```
+  
 - Go inside `simple-nodejs-typescript` and create a `package.json` by opening your terminal
   ```
   npm init
   ```
+  
 - Answer the questions prompt by terminal and confirm creation of package.json
   Here is the package.json file created:
 ```
@@ -38,6 +40,7 @@ npm i -D typescript ts-node
 ```
 `typescript` will install Typescript package
 `ts-node` will install Typescript node runner so we don't need to build the application everytime we do a change, we will use Nodemon
+
 - Run below command to create `tsconfig.json` file with default options enabled and comments
 ```
 npx typescript --init
@@ -69,6 +72,7 @@ Here is the tsconfig.json content:
     "exclude": ["node_modules"]
 }
 ```
+
 - Setup scripts inside `package.json`
 ```
 {
@@ -81,6 +85,7 @@ Here is the tsconfig.json content:
     // ...
 }
 ```
+
 
 ## Setup Express
 - Setup express
@@ -107,11 +112,69 @@ app.use('/', (req: Request, res: Response, next: NextFunction ) => {
 // Start server
 app.listen(port, () => console.log(`Server is listening on port ${port}!`));
 ```
+
 - Compile/build the application
 ```
 npm run build
 ```
 
-## Setup Nodemon
+- Run the application
+```
+node dist/index.js
+```
+
+- In your console you should see: `Server is listening in port 8010!`
+
+- Open another terminal then test
+```
+curl localhost:8010
+```
+
+- In your console you should see: `{"data":"Simple Nodejs Typescript Application"}`
+
+
+## Setup Nodemon for Development
+- When developing application it's better if we can handle every time we change a file, we don't need to build or restart the server, for this we are going to use nodemon
+
+- Install `nodemon`
+```
+npm i -D nodemon
+```
+
+- Create and configure `nodemon.json`
+```
+{
+    "watch": ["src"],
+    "ext": ".ts",
+    "ignore": [],
+    "exec": "ts-node ./src/index.ts"
+}
+```
+
+- Run the application
+```
+npm run start
+```
+
+- To test nodemon, open `src/index.ts` and change the console log part:
+```
+import express, { Application, Request, Response, NextFunction } from 'express';
+
+// Instance of express
+const app: Application = express();
+const port = 8010;
+
+// Application routing
+app.use('/', (req: Request, res: Response, next: NextFunction ) => {
+    res.status(200).send({data: 'Simple Nodejs Typescript Application'});
+});
+
+// Start server
+app.listen(port, () => console.log(`Server is listening on port ${port}! Running development using nodemon.`));
+```
+
+- Notice that `nodemon` automatically restarted your application
+
+
 
 
